@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>AU COEUR DES SAVEURS CAMEROUNAISE | Mets Traditionnels & Authenticité</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefaf5;
+      color: #2c221b;
+      scroll-behavior: smooth;
+    }
+
+    /* palette inspirée des épices : terre, vert palmier, orange doux */
+    :root {
+      --terre: #8b5a2b;
+      --epice: #d35400;
+      --feuille: #2c6e2f;
+      --creme: #fdf8f0;
+      --ombre: #4a3729;
+      --or: #e6b422;
+    }
+
+    /* HEADER STICKY + NAV */
+    header {
+      background: #fffaf3;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #f0e2d4;
+    }
+
+    .logo h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--epice);
+      letter-spacing: -0.5px;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--terre);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.3rem;
+      flex-wrap: wrap;
+    }
+    .nav-links button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.5rem 0.2rem;
+      color: #3e2a22;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links button:hover, .nav-links button.active {
+      color: var(--epice);
+      border-bottom-color: var(--epice);
+    }
+
+    /* sections communes */
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+      padding: 2rem 2rem 4rem;
+      max-width: 1400px;
+      margin: auto;
+    }
+    .active-page {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* HERO ACCUEIL */
+    .hero {
+      background: linear-gradient(107deg, #fff1e6 0%, #ffe6d5 100%);
+      border-radius: 3rem;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-text h2 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      color: #552e10;
+      line-height: 1.2;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      color: #4f3422;
+    }
+    .hero-btn {
+      background-color: var(--epice);
+      border: none;
+      padding: 0.9rem 2rem;
+      font-weight: bold;
+      border-radius: 60px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .hero-btn:hover {
+      background-color: #b84300;
+      transform: scale(1.02);
+    }
+    .hero-img {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-img img {
+      max-width: 100%;
+      border-radius: 2rem;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+    }
+
+    /* cartes menu */
+    .section-title {
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      margin: 2rem 0 1rem;
+      border-left: 6px solid var(--epice);
+      padding-left: 1rem;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+    }
+    .card-img {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      background-color: #ebd9cc;
+    }
+    .card-content {
+      padding: 1.2rem;
+    }
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+    }
+    .price {
+      color: var(--epice);
+      font-weight: 800;
+    }
+    .desc {
+      color: #5e4b3a;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+    .add-to-cart {
+      background: var(--feuille);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+    .add-to-cart:hover {
+      background: #1d541f;
+    }
+
+    /* panier / caisse style */
+    .cart-summary, .payment-methods, .delivery-info {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #efe0d4;
+      padding: 0.8rem 0;
+    }
+    .total-cart {
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .btn-pay, .btn-order, .checkout-btn {
+      background: var(--epice);
+      border: none;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 3rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input, select {
+      padding: 0.7rem;
+      border-radius: 2rem;
+      border: 1px solid #e2cfbf;
+      background: white;
+      font-family: inherit;
+      width: 100%;
+      margin: 0.3rem 0;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .flex-two {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .pay-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #fef5ed;
+      padding: 0.7rem;
+      border-radius: 2rem;
+      margin: 0.5rem 0;
+    }
+    footer {
+      background: #2c221b;
+      color: #f0ddd2;
+      text-align: center; 
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 750px) {
+      header { flex-direction: column; gap: 0.8rem; }
+      .hero-text h2 { font-size: 2rem; }
+      .page { padding: 1rem; }
+    }
+    .badge {
+      background: var(--or);
+      color: #332211;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    i.fa, i.far, i.fas { margin-right: 6px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>🍛 DEGUSTÉ CAMEROUNAIS (+237)</h1>
+    <p>Authenticité & générosité culinaire</p>
+  </div>
+  <div class="nav-links">
+    <button data-page="accueil" class="nav-btn active"><i class="fas fa-home"></i> Accueil</button>
+    <button data-page="menu" class="nav-btn"><i class="fas fa-utensils"></i> Menu</button>
+    <button data-page="prix" class="nav-btn"><i class="fas fa-tag"></i> Prix & Offres</button>
+    <button data-page="paiement" class="nav-btn"><i class="fas fa-credit-card"></i> Moyens de paiement</button>
+    <button data-page="livraison" class="nav-btn"><i class="fas fa-truck"></i> Livraison</button>
+    <button data-page="caisse" class="nav-btn"><i class="fas fa-shopping-cart"></i> Caisse 🛒</button>
+  </div>
+</header>
+
+<!-- PAGE ACCUEIL -->
+<div id="accueil" class="page active-page">
+  <div class="hero">
+    <div class="hero-text">
+      <h2>Voyagez au cœur des saveurs du Cameroun (+237)</h2>
+      <p>Ndolé, Poulet DG, Eru, Poisson braisé, Mbongo Tchobi... Plats préparés avec passion, épices traditionnelles et produits frais. Livraison rapide à domicile.</p>
+      <button class="hero-btn" id="exploreMenuBtn"><i class="fas fa-arrow-right"></i> Explorer notre menu</button>
+    </div>
+    <div class="hero-img">
+      <img src="https://i.pinimg.com/1200x/09/6a/e9/096ae9daeb9a7a08447316f745077a02.jpg" alt="Plat camerounais généreux" onerror="this.src='https://placehold.co/600x400?text=Plat+traditionnel'">
+    </div>
+  </div>
+  <div style="text-align: center; margin: 2rem 0;">
+    <div style="display: inline-flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;">
+      <span class="badge"><i class="fas fa-pepper-hot"></i> Épices maison</span>
+      <span class="badge"><i class="fas fa-leaf"></i> Légumes frais</span>
+      <span class="badge"><i class="fas fa-drumstick-bite"></i> Viande locale</span>
+      <span class="badge"><i class="fas fa-heart"></i> Recettes authentiques</span>
+    </div>
+  </div>
+  <div style="background: #fff2e9; border-radius: 2rem; padding: 2rem; text-align: center;">
+    <h3><i class="fas fa-quote-left"></i> La cuisine camerounaise, un patrimoine vivant</h3>
+    <p style="max-width: 700px; margin: auto;">Chez DEGUSTÉ CAMEROUNAIS(+237), chaque plat raconte une histoire : celle des mets transmis de génération en génération. Du fameux "Eru" du sud-ouest au "Koki" ou au "Sanga", nous valorisons la richesse culinaire de nos dix régions.</p>
+  </div>
+</div>
+
+<!-- PAGE MENU (catalog complet) -->
+<div id="menu" class="page">
+  <h2 class="section-title"><i class="fas fa-list-ul"></i> Notre menu signature</h2>
+  <div class="menu-grid" id="menuGrid"></div>
+</div>
+
+<!-- PAGE PRIX : tableau résumé + promo -->
+<div id="prix" class="page">
+  <h2 class="section-title"><i class="fas fa-coins"></i> Prix & formules</h2>
+  <div class="cart-summary">
+    <p>✔️ Nos prix sont tout compris (TVA incluse). Des réductions pour commandes groupées.</p>
+    <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+      <thead><tr style="background:#f1e3d9;"><th>Plat</th><th>Prix (XAF)</th><th>Promotion</th></tr></thead>
+      <tbody id="priceTableBody"></tbody>
+    </table>
+    <p><i class="fas fa-gift"></i> Offre spéciale : <strong>-5%</strong> sur toute commande > 10000 XAF </p>
+  </div>
+</div>
+
+<!-- PAGE MOYENS DE PAIEMENT -->
+<div id="paiement" class="page">
+  <h2 class="section-title"><i class="fas fa-credit-card"></i> Moyens de paiement sécurisés</h2>
+  <div class="payment-methods">
+    <div class="pay-option"><i class="fab fa-cc-visa fa-2x"></i> <span><strong>Carte Visa / Mastercard</strong> (paiement sécurisé)</span></div>
+    <div class="pay-option"><i class="fab fa-paypal fa-2x"></i> <span><strong>PayPal</strong> – payez en ligne facilement</span></div>
+    <div class="pay-option"><i class="fas fa-mobile-alt fa-2x"></i> <span><strong>Orange Money / MTN Mobile Money</strong> (Cameroun) – Paiement direct via mobile</span></div>
+    <div class="pay-option"><i class="fas fa-money-bill-wave fa-2x"></i> <span><strong>Espèces à la livraison</strong> (uniquement sur Yaoundé/Douala)</span></div>
+    <div class="pay-option"><i class="fas fa-university fa-2x"></i> <span><strong>Virement bancaire</strong> – sur demande</span></div>
+    <p style="margin-top: 1rem;">🔒 100% sécurisé – vos données sont cryptées. Choisissez le mode qui vous convient lors du passage en caisse.</p>
+  </div>
+</div>
+
+<!-- PAGE LIVRAISON -->
+<div id="livraison" class="page">
+  <h2 class="section-title"><i class="fas fa-shipping-fast"></i> Zones & délais de livraison</h2>
+  <div class="delivery-info">
+    <p><i class="fas fa-map-marker-alt"></i> <strong>Livraison à domicile :</strong> Douala, Yaoundé, Bafoussam, Garoua (extension vers autres villes bientôt).</p>
+    <p><i class="fas fa-clock"></i> <strong>Délais :</strong> 25 min - 1h selon distance. Commandes avant 20h pour livraison le jour même.</p>
+    <p><i class="fas fa-motorcycle"></i> <strong>Frais de livraison :</strong> 1000 XAF à 2500 XAF (offerts dès 9 000 XAF d'achat).</p>
+    <p><i class="fas fa-thermometer-half"></i> <strong>Emballage isotherme :</strong> respect des normes d'hygiène, plats bien conditionnés.</p>
+    <div style="background:#efe1d4; border-radius: 1rem; padding:1rem; margin-top:1rem;"><i class="fas fa-store"></i> Retrait possible sur point de vente à Bonapriso (Douala) sans frais.</div>
+  </div>
+</div>
+
+<!-- PAGE CAISSE (panier + validation) -->
+<div id="caisse" class="page">
+  <h2 class="section-title"><i class="fas fa-shopping-basket"></i> Votre panier & caisse</h2>
+  <div id="cartContainer" class="cart-summary">
+    <!-- dynamique panier -->
+  </div>
+  <div class="cart-summary">
+    <h3>Finaliser la commande</h3>
+    <div class="flex-two">
+      <div class="form-group" style="flex:1"><input type="text" id="customerName" placeholder="Nom complet"></div>
+      <div class="form-group" style="flex:1"><input type="tel" id="customerPhone" placeholder="Téléphone (ex: 694088656)"></div>
+    </div>
+    <div class="form-group"><input type="text" id="customerAddress" placeholder="Adresse de livraison complète"></div>
+    <div class="form-group">
+      <select id="paymentSelect">
+        <option value="Carte bancaire">💳 Carte bancaire (paiement en ligne)</option>
+        <option value="Orange Money">📱 Orange Money</option>
+        <option value="MTN Mobile Money">📲 MTN Mobile Money</option>
+        <option value="Espèces à la livraison">💵 Espèces à la livraison</option>
+      </select>
+    </div>
+    <button id="finalizeOrderBtn" class="btn-pay"><i class="fas fa-check-circle"></i> Passer la commande</button>
+    <div id="orderMessage" style="margin-top: 1rem; font-weight: bold;"></div>
+  </div>
+</div>
+
+<footer>
+  <p>🍽️ Saveurs du Cameroun – Célébrons la richesse culinaire nationale – Tous droits réservés © 2025</p>
+  <p><i class="fas fa-phone-alt"></i> +237 694088656 | ngombockhermine6@gmail.com</p>
+</footer>
+
+<script>
+  // ---------- BASE DE DONNEES DES METS (valorisant la cuisine camerounaise) ----------
+  const menuItems = [
+    { id: 1, name: "Ndolé aux crevettes & boeuf", desc: "Feuilles de ndolé, purée d'arachides, crevettes et boeuf fumé.", price: 1500, image: "https://i.pinimg.com/1200x/0e/92/a3/0e92a37772f91de30a3d6bb8cc4698dd.jpg" },
+    { id: 2, name: "Poulet DG (spécial)", desc: "Poulet, plantains mûrs, légumes, sauce onctueuse – plat festif.", price: 3500, image: "https://i.pinimg.com/736x/44/69/09/4469098cd0fe64b0425410393eedf8f2.jpg" },
+    { id: 3, name: "Eru & Water fufu", desc: "Feuilles d' eru hachées, gnetum, poisson fumé, épices indigènes.", price: 2000, image: "https://i.pinimg.com/1200x/80/20/bd/8020bdfc95a3509f3676b271bf9e8362.jpg" },
+    { id: 4, name: "Poisson braisé (capitaine)", desc: "Poisson frais mariné au piment, accompagné de sauce arachide et plantain.", price: 2500, image: "https://i.pinimg.com/736x/d3/c2/05/d3c205ff61b5ff713ab817619822f6ae.jpg" },
+    { id: 5, name: "Mbongo Tchobi", desc: "Poisson/viande sauce noire aux épices bamiléké, servi avec macabo.", price: 2000, image: "https://i.pinimg.com/1200x/e6/e9/f5/e6e9f554aa8c0083fbfc67f081eaa494.jpg" },
+    { id: 6, name: "Sanga (Tripes & épinards)", desc: "Tripes, épinards locaux, sauce tomate pimentée – délice du terroir.", price: 3400, image: "https://i.pinimg.com/736x/b9/48/ba/b948bae394bf3c4eb2d30eb731e32845.jpg" },
+    { id: 7, name: "Koki (haricot)", desc: "Pâte de haricot noir, feuilles de bananier, accompagné de riz.", price: 1000, image: "https://i.pinimg.com/1200x/77/a6/c1/77a6c10851beaae57e33649128d18858.jpg" },
+    { id: 8, name: "Miondo & poisson", desc: "Bâton de manioc, sauce piquante et poisson fumé.", price: 2500, image: "https://i.pinimg.com/736x/3b/8d/c0/3b8dc0244d9fe41bb71d07a92b77f16e.jpg" }
+  ];
+
+  // Panier : stockage localStorage
+  let cart = [];
+
+  function saveCart() {
+    localStorage.setItem("camerounCart", JSON.stringify(cart));
+  }
+  function loadCart() {
+    const stored = localStorage.getItem("camerounCart");
+    if(stored) cart = JSON.parse(stored);
+    else cart = [];
+  }
+  function addToCart(itemId) {
+    const item = menuItems.find(i => i.id === itemId);
+    if(item) {
+      const existing = cart.find(i => i.id === itemId);
+      if(existing) existing.qty += 1;
+      else cart.push({ ...item, qty: 1 });
+      saveCart();
+      updateCartUI();
+      alert(`${item.name} ajouté au panier !`);
+    }
+  }
+  function updateCartUI() {
+    const cartContainer = document.getElementById("cartContainer");
+    if(!cartContainer) return;
+    if(cart.length === 0) {
+      cartContainer.innerHTML = `<p><i class="fas fa-shopping-cart"></i> Votre panier est vide. Découvrez nos délicieux mets dans le menu !</p>`;
+      return;
+    }
+    let html = `<h3>Détail de votre commande</h3>`;
+    let total = 0;
+    cart.forEach((item, idx) => {
+      const itemTotal = item.price * item.qty;
+      total += itemTotal;
+      html += `<div class="cart-item">
+                  <span><strong>${item.name}</strong> x ${item.qty}</span>
+                  <span>${itemTotal} XAF <button class="remove-item" data-id="${item.id}" style="background: #b94b2c; border:none; border-radius: 30px; padding:0.2rem 0.8rem; color:white; margin-left: 0.5rem; cursor:pointer;">Retirer</button></span>
+                </div>`;
+    });
+    html += `<div class="total-cart">Total : ${total} XAF</div>`;
+    cartContainer.innerHTML = html;
+    document.querySelectorAll(".remove-item").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = parseInt(btn.getAttribute("data-id"));
+        cart = cart.filter(i => i.id !== id);
+        saveCart();
+        updateCartUI();
+        updateCartUI(); // refresh any extra component
+      });
+    });
+  }
+
+  // Générer menu dynamique
+  function generateMenu() {
+    const container = document.getElementById("menuGrid");
+    if(!container) return;
+    container.innerHTML = "";
+    menuItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-img" style="background-image: url('${item.image}'); background-size: cover;"></div>
+        <div class="card-content">
+          <div class="card-title"><span>${item.name}</span><span class="price">${item.price} XAF</span></div>
+          <div class="desc">${item.desc}</div>
+          <button class="add-to-cart" data-id="${item.id}"><i class="fas fa-plus-circle"></i> Commander</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+    document.querySelectorAll(".add-to-cart").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = parseInt(btn.getAttribute("data-id"));
+        addToCart(id);
+      });
+    });
+  }
+
+  // generation tableau prix
+  function generatePriceTable() {
+    const tbody = document.getElementById("priceTableBody");
+    if(tbody) {
+      tbody.innerHTML = "";
+      menuItems.forEach(item => {
+        const row = `<tr><td>${item.name}</td><td>${item.price} XAF</td><td style="color:#b1622c;">-3% dès 2 plats</td></tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+  }
+
+  // caisse finale
+  function setupCheckout() {
+    const finalBtn = document.getElementById("finalizeOrderBtn");
+    if(finalBtn) {
+      finalBtn.addEventListener("click", () => {
+        if(cart.length === 0) {
+          document.getElementById("orderMessage").innerHTML = "<span style='color:#c0392b'>Votre panier est vide !</span>";
+          return;
+        }
+        const name = document.getElementById("customerName")?.value.trim();
+        const phone = document.getElementById("customerPhone")?.value.trim();
+        const addr = document.getElementById("customerAddress")?.value.trim();
+        const payment = document.getElementById("paymentSelect")?.value;
+        if(!name || !phone || !addr) {
+          document.getElementById("orderMessage").innerHTML = "<span style='color:#c0392b'>Veuillez remplir nom, téléphone et adresse.</span>";
+          return;
+        }
+        const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+        const msg = `✅ Merci ${name} ! Votre commande (${cart.length} articles) d’un montant de ${total} XAF a été reçue. Mode de paiement : ${payment}. Livraison à : ${addr}. Un conseiller vous contactera sous peu.`;
+        document.getElementById("orderMessage").innerHTML = `<span style='color:#2e7d32; background:#e6f4ea; padding:0.6rem; display:inline-block; border-radius:1rem;'>${msg}</span>`;
+        // Simuler clear panier (optionnel mais logique)
+        // On vide le panier après commande simulée? (optionnel)
+        cart = [];
+        saveCart();
+        updateCartUI();
+        // reset inputs
+        document.getElementById("customerName").value = "";
+        document.getElementById("customerPhone").value = "";
+        document.getElementById("customerAddress").value = "";
+      });
+    }
+  }
+
+  // Navigation entre pages
+  function initNavigation() {
+    const btns = document.querySelectorAll(".nav-btn");
+    const pages = document.querySelectorAll(".page");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pageId = btn.getAttribute("data-page");
+        pages.forEach(page => page.classList.remove("active-page"));
+        document.getElementById(pageId).classList.add("active-page");
+        btns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        // si on va dans caisse : refresh le panier
+        if(pageId === "caisse") updateCartUI();
+        if(pageId === "prix") generatePriceTable();
+        if(pageId === "menu") generateMenu();
+      });
+    });
+    // Bouton hero explorer
+    const explore = document.getElementById("exploreMenuBtn");
+    if(explore) {
+      explore.addEventListener("click", () => {
+        document.querySelector('[data-page="menu"]').click();
+      });
+    }
+  }
+
+  // chargement initial
+  window.addEventListener("DOMContentLoaded", () => {
+    loadCart();
+    generateMenu();
+    generatePriceTable();
+    updateCartUI();
+    setupCheckout();
+    initNavigation();
+    // refresh caisse à l'initialisation
+    setInterval(() => {
+      const active = document.querySelector(".active-page")?.id;
+      if(active === "caisse") updateCartUI();
+    }, 500);
+  });
+</script>
+</body>
+</html>
